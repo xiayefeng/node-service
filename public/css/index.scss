@@ -1,0 +1,220 @@
+@import 'mixin.scss';
+$positionTop: -80px;
+
+/********************************/
+.swiper-container {
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	height: 500px;
+}
+.swiper-wrapper{
+	position: relative;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	display: flex;
+	transition-property: transform;
+	box-sizing: content-box;
+}
+.swiper-slide{
+	height: 500px;
+	width: 100%;
+	text-align: center;
+	font-size: 50px;
+	background-size: cover;
+}
+.swiper-wrapper .banner1{
+	background: url("../img/banner.png") center no-repeat;
+}
+.swiper-wrapper .banner2{
+	background: url("../img/banner02.png") center no-repeat;
+}
+.swiper-wrapper .banner3{
+	background: url("../img/banner03.png") center no-repeat;
+}
+
+/******************************/
+.middle-block{
+	border-bottom: 1px solid #ccc;
+}
+
+.middle-block .middle-block-box{
+	width: 1200px;
+	margin: 5px auto;
+	height: 60px;
+	line-height: 60px;
+	font-size: 16px;
+}
+.middle-block-box .mid-nav-wrap .mid-nav-item{
+	margin-right: 60px;
+}
+.mid-nav-wrap .mid-nav-item a{
+	color: #333;
+	&:hover{
+		text-decoration: none;
+	}
+}
+
+/****************************/
+.platform-brief{
+	width: 1200px;
+	margin: 0 auto;
+	position:relative;
+}
+.platform-brief-hash{
+	position: absolute;
+	top: $positionTop;
+}
+.platform-brief .title{
+	text-align: center;
+	margin-top: 80px;
+	position: relative;
+}
+.platform-brief .second-title{
+	color: #979797;
+	text-align: center;
+}
+
+/************************************/
+.intorduction-wrap{
+	margin-top: 30px;
+}
+.intorduction-text{
+	float: left;
+	width: 35%;
+	font-size: 16px;
+}
+.intorduction-img{
+	float: right;
+	width: 700px;
+	height: 431px;
+}
+.intorduction-text .intorduction-text-top{
+	line-height: 30px;
+	margin-bottom: 30px;
+}
+
+/************************/
+.wision-wrap{
+	margin-top: 30px;
+	position: relative;
+	z-index: 2;
+}
+.wision-img{
+	float:left;
+	width: 673px;
+	height: 382px;
+}
+.wision-text{
+	width: 40%;
+	float: right;
+	font-size: 16px;
+}
+.wision-text h4{
+	font-size: 16px;
+	font-weight: bold;
+}
+.wision-text .intelligence{
+	margin-top: 30px;
+}
+.blue-box{
+	position:absolute;
+	left: -40%;
+	top: 120px;
+	width: 800px;
+	height: 175px;
+	background-color: #2d87ea;
+	z-index: -1;
+}
+
+/*******************************/
+.company-wrap{
+	margin-top: 100px;
+	height: 620px;
+	background: url("../img/bottombg.png") center no-repeat;
+	background-size: cover;
+	color: #fff;
+	@extend %rel;
+
+	.company-develop-hash{
+        @extend %abs;
+        top: $positionTop;
+		left: 0;
+	}
+}
+.company-wrap .company-develop{
+	width: 1200px;
+	margin: 0 auto;
+}
+.company-develop .title{
+	margin-top: 65px;
+	text-align: center;
+}
+.company-develop .second-title{
+	text-align: center;
+}
+.develop-histroy{
+	margin-top: 20px;
+}
+.develop-list-item{
+	float: left;
+	width: 20%;
+	padding: 0 54px 0 0;
+}
+.develop-list-item .top-circle{
+	margin: 20px auto;
+	font-size: 32px;
+	width: 106px;
+	height: 106px;
+	line-height: 106px;
+	text-align: center;
+	box-sizing: border-box;
+	border-radius: 50%;
+	border: 1px solid #fff;
+	color: #fff;
+}
+
+/*********************************/
+.company-culture{
+	width: 1200px;
+	margin: 0 auto;
+	@extend %rel;
+
+	.company-culture-hash{
+		@extend %abs;
+		left: 0;
+		top: $positionTop;
+	}
+}
+
+.company-culture .title{
+	margin-top: 65px;
+	text-align: center;
+}
+
+.company-culture .second-title{
+	text-align: center;
+	color: #979797;
+}
+.company-culture .culture-detail{
+	text-align: center;
+	margin: 30px auto;
+
+}
+.company-culture .culture-detail h5{
+	font-size: 16px;
+}
+.culture-img{
+	width: 100%;
+	margin: 40px 0 80px;
+}
+.culture-img .img-item{
+	float: left;
+	height: 280px;
+	width: 290px;
+}
+.culture-img .img-item:not(:last-child){
+	margin-right: 12px;
+}
+
