@@ -1,0 +1,31 @@
+
+$isZh: false;
+
+$border-color: #0d5cab !default;
+$theme-color: #2d87ea !default;
+$bg-color: #0b5caa !default;
+$foot-bg: #0054a5 !default;
+$foot-color: #68a3df !default;
+$seiper-point-bg: #007aff !default;
+
+$border-color1: #0d5cab;
+$border-color2: #2eba9a;
+$bg-color2: #2bba9c;
+$foot-bg2: #0e6d59;
+$foot-color2: #95ded2;
+$seiper-point-bg2: #16edc0;
+
+
+
+$theme-color1: #2d87ea;
+$theme-color2: #2aba9c;
+
+@if $isZh {
+	$border-color: $border-color2;
+	$theme-color: $theme-color2;
+	$bg-color: $bg-color2;
+	$foot-bg: $foot-bg2;
+	$foot-color: $foot-color2;
+	$seiper-point-bg: $seiper-point-bg2;
+}
+

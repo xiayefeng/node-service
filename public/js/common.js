@@ -1,74 +1,68 @@
 // mySwiper.appendSlide('<div class="swiper-slide" data-id="4">这是一个新的slide</div>')
 (function( win, $ ){
-	var isHome = false
-	var prefix = ''
-	console.log(location.pathname)
-	if( location.pathname.indexOf( 'index' ) > -1 || location.pathname === '/') {
-		isHome = true
-		prefix = 'html/'
-	}
+	var baseURL = 'http://192.168.8.239:8888/website-backend'
+	win.hostURL = 'http://192.168.8.239:8888'
 
-console.log(isHome)
-	if( !isHome ) {
-		$( '.head' ).load('common/header.html', function( res ){
-			$( this ).empty().append( res )
-			bindEvent(prefix)
-			switchNav()
-		} )
-		$( '.foot' ).load( 'common/footer.html', function( res ){
-			$( this ).empty().append( res )
-
-		} )
+	var doc = win.document;
+	var docEl = doc.documentElement;
+	var metaEl = doc.querySelector('meta[name="viewport"]')
+	// console.log(metaEl)
+	var drp = win.devicePixelRatio || 1;
+	if (drp >=3) {
+		drp = 3
+	} else if(drp >= 2) {
+		drp = 2
 	} else {
-		bindEvent(prefix)
-		switchNav()
+		drp = 1
 	}
+	var scale = 1 / drp
 
-	function bindEvent(prefix) {
-		$( '.top-nav' ).unbind().bind( 'click', function( e ){
-			console.log(222)
-			var id = e.target.dataset.id
-			var dom = e.target
-			if( dom.tagName === 'LI' ) {
-				$( dom ).addClass( 'active' ).siblings().removeClass( 'active' )
-			}
-			if( id === '1' )
-			{
-				location.href = prefix ? 'index.html': '../index.html'
-			}
-			else if( id === '2' )
-			{
-				location.href = prefix + 'product-introduce.html'
-			}
-			else if( id === '3' )
-			{
-				location.href = prefix + 'news.html'
-			}
-			else if( id === '4' )
-			{
-				location.href = prefix + 'cooperative-partner.html'
-			}
-			else if( id === '5' )
-			{
-				location.href = prefix + 'channel-cooperation.html'
-			}
-		} )
-	}
-
-	function switchNav() {
-		var pathname = location.pathname
-		if( pathname.indexOf( 'index.html' ) > -1 ) {
-			$('.top-nav').find('.nav-item').eq(0).addClass('active').siblings().removeClass('active')
-		}else if( pathname.indexOf('product-introduce.html') > -1 ){
-			$('.top-nav').find('.nav-item').eq(1).addClass('active').siblings().removeClass('active')
-		}else if( pathname.indexOf('news.html') > -1 ) {
-			$('.top-nav').find('.nav-item').eq(2).addClass('active').siblings().removeClass('active')
-		}else if( pathname.indexOf('cooperative-partner.html') > -1  ) {
-			$('.top-nav').find('.nav-item').eq(3).addClass('active').siblings().removeClass('active')
-		}else if( pathname.indexOf('channel-cooperation.html') > -1  ) {
-			$('.top-nav').find('.nav-item').eq(4).addClass('active').siblings().removeClass('active')
+	if (!metaEl) {
+		metaEl = doc.createElement('meta');
+		metaEl.setAttribute('name', 'viewport');
+		metaEl.setAttribute('content', 'width=device-width, initial-scale=' + scale + ', minimum-scale='+ scale + ', maximum-scale=2' );
+		if (docEl.firstElementChild) {
+			docEl.firstElementChild.appendChild(metaEl);
+		} else {
+			var wrap = doc.createElement('div');
+			wrap.appendChild(metaEl);
+			doc.write(wrap.innerHTML);
 		}
-
 	}
+
+	//公共ajax请求
+	win.ajaxCommon = function( type, params, url, successCallback, failCallback) { //ajax通用方法
+		type = type || 'get'; //get
+
+		var xhr = $.ajax({
+			type: type,
+			url: baseURL + url,
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded'
+			},
+			timeout: 20000, // 设置超时时间
+			data: params,
+			dataType: 'json',
+			xhrFields: {
+				withCredentials: true, //让ajax携带cookie,解决跨域报错问题
+			},
+			crossDomain: true,
+			success: function (data) {
+				successCallback && successCallback(data);
+			},
+			error: function (res,status,e) {
+				console.log(res,status,e);
+				if( failCallback ) failCallback(res)
+			},
+			complete: function (XMLHttpRequest, status) {
+				if (status === 'timeout') {
+					xhr.abort(); // 超时后中断请求
+                    console.log()
+					// location.reload();
+				}
+			}
+		});
+	}
+
 
 })( window, jQuery )
