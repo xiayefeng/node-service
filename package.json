@@ -18,5 +18,8 @@
     "mime": "^2.4.4",
     "socket.io": "^2.3.0",
     "websocket": "^1.0.31"
+  },
+  "devDependencies": {
+    "ws": "^7.3.0"
   }
 }
