@@ -6,7 +6,6 @@
 	var doc = win.document;
 	var docEl = doc.documentElement;
 	var metaEl = doc.querySelector('meta[name="viewport"]')
-	// console.log(metaEl)
 	var drp = win.devicePixelRatio || 1;
 	if (drp >=3) {
 		drp = 3
@@ -29,7 +28,7 @@
 			doc.write(wrap.innerHTML);
 		}
 	}
-
+	
 	//公共ajax请求
 	win.ajaxCommon = function( type, params, url, successCallback, failCallback) { //ajax通用方法
 		type = type || 'get'; //get
@@ -58,11 +57,10 @@
 				if (status === 'timeout') {
 					xhr.abort(); // 超时后中断请求
                     console.log()
-					// location.reload();
+					location.reload();
 				}
 			}
 		});
 	}
-
-
+	
 })( window, jQuery )
