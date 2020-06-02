@@ -1,6 +1,9 @@
 (function( win, doc, $ ){
 	var baseURL = 'http://192.168.8.239:8888/website-backend'
-
+	if(isMobile()){
+    var vConsole = new VConsole();
+	}
+  
 	var doc = win.document;
 	var docEl = doc.documentElement;
 	var metaEl = doc.querySelector('meta[name="viewport"]')
@@ -68,6 +71,14 @@
     script.async = false
     doc.body.appendChild(script)
     return script
-  }
+	}
+	function isMobile () {
+		var agent = navigator.userAgent
+		return (
+				agent.match(/Android/i) ||
+				agent.indexOf('iPhone') > 0 ||
+				agent.indexOf('iPad') > 0
+		)
+	}
 
 })( window, document, jQuery )

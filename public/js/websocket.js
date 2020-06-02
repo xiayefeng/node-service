@@ -1,5 +1,6 @@
 (function(win, doc){
-  const socket = new WebSocket('ws://localhost:3000')
+  var host = location.host
+  const socket = new WebSocket('ws://' + host)
 
 	// Connection opened
   socket.addEventListener('open', function (event) {
@@ -9,7 +10,7 @@
   socket.addEventListener('message', function (event) {
     console.log('Message from server ', event.data);
     if(event.data === 'update') {
-      win.location.reload()
+      win.location.reload(true)
     }
   });
 

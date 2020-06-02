@@ -514,7 +514,6 @@
 			}, function(err){
 				console.log(err)
 			})
-			
 		} )
 		/*$( '.nav-item' ).find( '.btn' ).unbind().bind( 'click', function(){
 			var $self = $( this )
