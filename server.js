@@ -24,17 +24,20 @@ var server = http.createServer(function(req, res) {
     // 解析后对象的 ext 属性中保存着目标文件的后缀名
     var ext = pathObj.ext;
     if(ext === '.html' || (pathObj.dir === '/'&& pathObj.base=== '')) {
-      currentPage[0] = pathObj.base || 'index.html'
       sourceSet.clear()
-      sourceSet.add('/index.html')
-    }else {
+      if((pathObj.dir === '/'&& pathObj.base=== '') || (pathObj.dir === '/'&& pathObj.base === 'index.html')){
+        sourceSet.add('/index.html')
+      } else {
+        sourceSet.add(urlPathname)
+      }
+    } else {
       sourceSet.add(urlPathname)
     }
     
     switch (urlPathname) {
       case '/':
       case '':
-      case '/index':  
+      case '/index': 
           readStaticFile(res, '.'+ basePath +'/index.html');
           break
       case '/login':
@@ -44,14 +47,13 @@ var server = http.createServer(function(req, res) {
         break
        default:
          readStaticFile(res, filePathname)
+         break
     }
     // 读取静态文件
    
 });
 
-setTimeout(() => {
-  console.log(sourceSet)
-}, 8500)
+
 const sendMsg = function(ws){
     return function (msg) {
       ws.send(msg)

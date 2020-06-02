@@ -10,7 +10,7 @@
   socket.addEventListener('message', function (event) {
     console.log('Message from server ', event.data);
     if(event.data === 'update') {
-      win.location.reload(true)
+      win.location.reload(true) // 强制刷新
     }
   });
 

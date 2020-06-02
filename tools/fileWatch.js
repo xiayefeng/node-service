@@ -12,6 +12,11 @@ function fileWatch(cb){
     //  console.log(path.parse(filePath + filename).ext)
     if(filename && event === 'change' && filename.includes('.')) {
       // console.log(filename)
+      var ext = path.parse(filePath + filename).ext
+      console.log(ext)
+      if(!['.js', '.html', '.css'].includes(ext)){
+        return
+      }
       var currentMd5 = md5(fs.readFileSync(filePath + filename))
       if(currentMd5 === prevMd5){
         return
