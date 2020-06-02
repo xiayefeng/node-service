@@ -1,7 +1,5 @@
-// mySwiper.appendSlide('<div class="swiper-slide" data-id="4">这是一个新的slide</div>')
-(function( win, $ ){
+(function( win, doc, $ ){
 	var baseURL = 'http://192.168.8.239:8888/website-backend'
-	win.hostURL = 'http://192.168.8.239:8888'
 
 	var doc = win.document;
 	var docEl = doc.documentElement;
@@ -62,5 +60,14 @@
 			}
 		});
 	}
-	
-})( window, jQuery )
+
+	addScript('js/websocket.js')
+	function addScript (url) {
+    var script = doc.createElement('script')
+    script.src = url
+    script.async = false
+    doc.body.appendChild(script)
+    return script
+  }
+
+})( window, document, jQuery )

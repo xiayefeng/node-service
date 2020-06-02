@@ -64,7 +64,7 @@
 		} )
 	}
 
-	getNav()
+	// getNav()
 
 
 	function renderTopNav( navData ){
@@ -514,9 +514,7 @@
 			}, function(err){
 				console.log(err)
 			})
-			/*setTimeout( function(){
-				$self.parent().hide()
-			}, 200 )*/
+			
 		} )
 		/*$( '.nav-item' ).find( '.btn' ).unbind().bind( 'click', function(){
 			var $self = $( this )
@@ -527,24 +525,5 @@
 			}, 500 )
 		} )*/
 	}
-	const socket = new WebSocket('ws://localhost:3000')
-
-	// Connection opened
-socket.addEventListener('open', function (event) {
-	socket.send('Hello Server!');
-});
-
-// Listen for messages
-socket.addEventListener('message', function (event) {
-	console.log('Message from server ', event.data);
-});
-
-socket.onerror = function(event) {
-  console.error("WebSocket error observed:", event);
-};
-
-socket.onclose = function(event) {
-  console.log("WebSocket is closed now.");
-};
 
 })( window, document, jQuery )

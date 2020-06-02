@@ -15,9 +15,7 @@
     "express": "^4.17.1",
     "js-md5": "^0.7.3",
     "lodash": "^4.17.15",
-    "mime": "^2.4.4",
-    "socket.io": "^2.3.0",
-    "websocket": "^1.0.31"
+    "mime": "^2.4.4"
   },
   "devDependencies": {
     "ws": "^7.3.0"

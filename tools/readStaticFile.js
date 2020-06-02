@@ -4,8 +4,6 @@ let fs = require('fs');
 let mime = require('mime');
 
 function readStaticFile(res, filePathname) {
-  console.log(res, filePathname)
-
   var ext = path.parse(filePathname).ext;
   var mimeType = mime.getType(ext);
   
