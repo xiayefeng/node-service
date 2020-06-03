@@ -30,6 +30,5 @@ function readStaticFile(res, filePathname) {
       return false;
   }
 }
-
 // 导出函数
 module.exports = readStaticFile;

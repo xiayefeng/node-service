@@ -7,11 +7,9 @@ var url = require('url');
 var path = require('path');
 var readStaticFile = require('./tools/readStaticFile');
 var fileWatch = require('./tools/fileWatch')
-// var io = require('socket.io')
 
-var currentPage = []
-var sourceSet = new Set()
-var basePath = '/public'
+var sourceSet = new Set() // 页面依赖收集器
+var basePath = '/public' // 静态文件目录
 // 搭建 HTTP 服务器
 var server = http.createServer(function(req, res) {
     var urlObj = url.parse(req.url);
@@ -24,14 +22,14 @@ var server = http.createServer(function(req, res) {
     // 解析后对象的 ext 属性中保存着目标文件的后缀名
     var ext = pathObj.ext;
     if(ext === '.html' || (pathObj.dir === '/'&& pathObj.base=== '')) {
-      sourceSet.clear()
+      sourceSet.clear() // 跳页面后清空依赖
       if((pathObj.dir === '/'&& pathObj.base=== '') || (pathObj.dir === '/'&& pathObj.base === 'index.html')){
-        sourceSet.add('/index.html')
+        sourceSet.add('/index.html') // 访问首页时收集当前页面依赖文件
       } else {
-        sourceSet.add(urlPathname)
+        sourceSet.add(urlPathname) // 访问其他页面html时 收集依赖文件
       }
     } else {
-      sourceSet.add(urlPathname)
+      sourceSet.add(urlPathname) // 访问非html时，文件依赖收集
     }
     
     switch (urlPathname) {
@@ -49,7 +47,6 @@ var server = http.createServer(function(req, res) {
          readStaticFile(res, filePathname)
          break
     }
-    // 读取静态文件
    
 });
 
@@ -60,30 +57,24 @@ const sendMsg = function(ws){
     }
 }
 var sendMethod = null
-const wss = new WebSocket.Server({ server });
+const wss = new WebSocket.Server({ server }); // 创建websocke服务
 wss.on('connection', function connection(ws) {
-  ws.on('message', function incoming(message) {
+  ws.on('message', function incoming(message) { // 监听客户端向服务发送消息
     console.log('received: %s', message);
   });
   sendMethod = sendMsg(ws)
-  ws.send('something');
+  ws.send('something'); //websockt 连接后向客户端发送消息
 });
 const fileChange = function(path) {
   console.log(path)
   var str = path.replace(/\\/g, '/')
   str = '/' + str
   if(sourceSet.has(str)){
-    sendMethod('update')
+    sendMethod && sendMethod('update') // 依赖文件变化时向客户端推送消息
   }
 }
 fileWatch(fileChange)
-/* var socket = io(server)
-socket.on('connection', (socket) => {
-  console.log('a user connected');
-  setTimeout(() => {
-    socket.emit('message', '22333');
-  }, 1000)
-}) */
+
 // 在 3000 端口监听请求
 server.listen(3000, function() {
     console.log("服务器运行中.");
