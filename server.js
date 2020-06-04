@@ -1,28 +1,27 @@
 #!/usr/bin/env node
 
 // 引入相关模块
-var http = require('http');
-var WebSocket = require('ws');
-var url = require('url');
-var path = require('path');
-var readStaticFile = require('./tools/readStaticFile');
-var fileWatch = require('./tools/fileWatch')
+const http = require('http');
+const WebSocket = require('ws');
+const url = require('url');
+const path = require('path');
+const readStaticFile = require('./tools/readStaticFile');
+const fileWatch = require('./tools/fileWatch')
 // var io = require('socket.io')
 
-var currentPage = []
-var sourceSet = new Set()
-var basePath = '/public'
+const sourceSet = new Set()
+const basePath = '/public'
 // 搭建 HTTP 服务器
-var server = http.createServer(function(req, res) {
-    var urlObj = url.parse(req.url);
-    var pathObj = path.parse(req.url)
+const server = http.createServer(function(req, res) {
+    const urlObj = url.parse(req.url);
+    const pathObj = path.parse(req.url)
     // console.log(pathObj)
-    var urlPathname = urlObj.pathname;
-    var filePathname = path.join(__dirname, basePath, urlPathname);
+    const urlPathname = urlObj.pathname;
+    const filePathname = path.join(__dirname, basePath, urlPathname);
      // 获取请求 URL 的查询字符串解析成的对象
-    var queryObj = urlObj.query;
+     const queryObj = urlObj.query;
     // 解析后对象的 ext 属性中保存着目标文件的后缀名
-    var ext = pathObj.ext;
+    const ext = pathObj.ext;
     if(ext === '.html' || (pathObj.dir === '/'&& pathObj.base=== '')) {
       sourceSet.clear()
       if((pathObj.dir === '/'&& pathObj.base=== '') || (pathObj.dir === '/'&& pathObj.base === 'index.html')){
@@ -59,7 +58,7 @@ const sendMsg = function(ws){
       ws.send(msg)
     }
 }
-var sendMethod = null
+let sendMethod = null
 const wss = new WebSocket.Server({ server });
 wss.on('connection', function connection(ws) {
   ws.on('message', function incoming(message) {
@@ -70,7 +69,7 @@ wss.on('connection', function connection(ws) {
 });
 const fileChange = function(path) {
   console.log(path)
-  var str = path.replace(/\\/g, '/')
+  let str = path.replace(/\\/g, '/')
   str = '/' + str
   if(sourceSet.has(str)){
     sendMethod('update')
