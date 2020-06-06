@@ -40,7 +40,7 @@
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded'
 			},
-			timeout: 20000, // 设置超时时间
+			timeout: 15000, // 设置超时时间
 			data: params,
 			dataType: 'json',
 			xhrFields: {

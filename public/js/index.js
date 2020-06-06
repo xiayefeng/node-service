@@ -515,14 +515,7 @@
 				console.log(err)
 			})
 		} )
-		/*$( '.nav-item' ).find( '.btn' ).unbind().bind( 'click', function(){
-			var $self = $( this )
-			$self.parent().addClass( 'hide-item' )
-
-			setTimeout( function(){
-				$self.parent().removeClass( 'hide-item' )
-			}, 500 )
-		} )*/
+		
 	}
 
 })( window, document, jQuery )
