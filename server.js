@@ -7,7 +7,6 @@ const url = require('url');
 const path = require('path');
 const readStaticFile = require('./tools/readStaticFile');
 const fileWatch = require('./tools/fileWatch')
-// var io = require('socket.io')
 
 const sourceSet = new Set() // 页面依赖收集器
 const basePath = '/public' // 静态文件目录
