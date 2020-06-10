@@ -67,6 +67,7 @@ wss.on('connection', function connection(ws) {
   });
   sendMethod = sendMsg(ws)
   ws.send('something'); //websockt 连接后向客户端发送消息
+  
 });
 const fileChange = function(path) {
   console.log(path)
